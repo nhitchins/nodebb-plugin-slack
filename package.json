@@ -1,0 +1,28 @@
+{
+  "name": "nodebb-plugin-slack",
+  "version": "0.0.1",
+  "description": "NodeBB Plugin for notifying forum administrators of new posts via Slack webhooks",
+  "main": "library.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nhitchins/nodebb-plugin-slack.git"
+  },
+  "keywords": [
+    "nodebb",
+    "plugin",
+    "slack"
+  ],
+  "author": {
+    "name": "Nicholas Hitchins",
+    "email": "n_hitchins@yahoo.com.au"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github/nhitchins/nodebb-plugin-slack/issues"
+  },
+  "readme": "",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "node-slack": "~0.0.4"
+  }
+}
