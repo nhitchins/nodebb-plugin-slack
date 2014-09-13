@@ -78,7 +78,7 @@
 			if (maxContentLength && content.length > maxContentLength) {
 				content = content.substring(0, maxContentLength) + "..."
 			}
-			var message = "<" + results.topic.link + "|[" + results.topic.category + ": " + results.topic.title + "]> " + content
+			var message = "<" + results.topic.link + "|[" + results.topic.category + ": " + results.topic.title + "]>\n" + content
 
 			slack.send({
 				"text"     : message,
