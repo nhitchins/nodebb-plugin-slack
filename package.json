@@ -23,6 +23,6 @@
   "readme": "",
   "readmeFilename": "README.md",
   "dependencies": {
-    "node-slack": "~0.0.4"
+    "node-slack": "git+https://github.com/xoxco/node-slack.git"
   }
 }
