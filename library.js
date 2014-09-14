@@ -46,7 +46,7 @@
 					var data = {
 						username : user.username,
 						email    : user.email,
-						image    : user.picture.match(/^\/\//) ? 'http:' + user.picture : user.picture;
+						image    : user.picture.match(/^\/\//) ? 'http:' + user.picture : user.picture
 					};
 					return callback(null, data);
 				})
