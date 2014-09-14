@@ -2,7 +2,7 @@
 	"id": "nodebb-plugin-slack",
 	"name": "NodeBB Slack",
 	"description": "NodeBB Plugin for notifying forum administrators of new posts via Slack webhooks",
-	"url": "https://github.com/nhitchins/nodebb-plugin-slack.git",
+	"url": "http://github.com/nhitchins/nodebb-plugin-slack.git",
 	"library": "./library.js",
 	"hooks": [
 		{ "hook": "static:app.load", "method": "init" },

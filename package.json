@@ -5,7 +5,7 @@
   "main": "library.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nhitchins/nodebb-plugin-slack.git"
+    "url": "http://github.com/nhitchins/nodebb-plugin-slack.git"
   },
   "keywords": [
     "nodebb",
@@ -18,7 +18,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github/nhitchins/nodebb-plugin-slack/issues"
+    "url": "http://github.com/nhitchins/nodebb-plugin-slack/issues"
   },
   "readme": "",
   "readmeFilename": "README.md",
