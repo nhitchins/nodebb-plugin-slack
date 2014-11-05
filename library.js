@@ -23,15 +23,34 @@
             }
         });
     
-    var Slack = {};
+    var Slack = {
+            config: {
+                domain: '',
+                token: '',
+                channel: '',
+                'post:maxlength': ''
+            }
+        };
 
     Slack.init = function(app, middleware, controllers, callback) {
         function render(req, res, next) {
             res.render('admin/plugins/slack', {});
         }
+
         app.get('/admin/plugins/slack', middleware.admin.buildHeader, render);
         app.get('/api/admin/plugins/slack', render);
-        slack = new SlackClient(meta.config['slack:domain'], meta.config['slack:token'])
+
+        meta.settings.get('slack', function(err, settings) {
+            for(var prop in Slack.config) {
+                if (settings.hasOwnProperty(prop)) {
+                    Slack.config[prop] = settings[prop];
+                }
+            }
+
+            slack = new SlackClient(Slack.config['domain'], Slack.config['token'])
+            console.log('init', Slack.config);
+        });
+
         callback();
     },
 
@@ -69,14 +88,14 @@
             }
         }, function(err, data) {
             // trim message based on config option
-            var maxContentLength = meta.config['slack:post:maxlength'] || false
+            var maxContentLength = Slack.config['post:maxlength'] || false
             if (maxContentLength && content.length > maxContentLength) { content = content.substring(0, maxContentLength) + '...'; }
             // message format: <username> posted [<categoryname> : <topicname>]\n <message>
             var message = '<' + data.topic.link + '|[' + data.topic.category + ': ' + data.topic.title + ']>\n' + content;
 
             slack.send({
                 'text'     : message,
-                'channel'  : (meta.config['slack:channel'] || '#general'),
+                'channel'  : (Slack.config['channel'] || '#general'),
                 'username' : data.user.username,
                 'icon_url' : data.user.image
             });
