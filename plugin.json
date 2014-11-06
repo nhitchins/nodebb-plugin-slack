@@ -1,7 +1,7 @@
 {
 	"id": "nodebb-plugin-slack",
-	"name": "NodeBB Slack",
-	"description": "NodeBB Plugin for notifying forum administrators of new posts via Slack webhooks",
+	"name": "Slack Integration",
+	"description": "Notifies forum administrators of new posts via Slack webhooks",
 	"url": "https://github.com/nhitchins/nodebb-plugin-slack.git",
 	"library": "./library.js",
 	"hooks": [
@@ -9,6 +9,5 @@
 		{ "hook": "filter:admin.header.build", "method": "adminMenu" },
 		{ "hook": "action:post.save", "method": "postSave"}
 	],
-	"minver": "0.5.0",
     "templates": "./public/templates"
 }
