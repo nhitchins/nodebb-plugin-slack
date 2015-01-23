@@ -37,8 +37,19 @@
             res.render('admin/plugins/slack', {});
         }
 
-        app.get('/admin/plugins/slack', middleware.admin.buildHeader, render);
-        app.get('/api/admin/plugins/slack', render);
+        var router;
+
+        if(app.router) {
+          callback = middleware;
+          controllers = app.controllers;
+          middleware = app.middleware;
+          router = app.router;
+        } else {
+          router = app;
+        }
+    
+        router.get('/admin/plugins/slack', middleware.admin.buildHeader, render);
+        router.get('/api/admin/plugins/slack', render);
 
         meta.settings.get('slack', function(err, settings) {
             for(var prop in Slack.config) {
