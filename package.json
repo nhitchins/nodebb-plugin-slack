@@ -1,6 +1,6 @@
 {
   "name": "nodebb-plugin-slack",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "NodeBB Plugin for notifying forum administrators of new posts via Slack webhooks",
   "main": "library.js",
   "repository": {
