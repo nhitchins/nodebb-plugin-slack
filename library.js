@@ -104,7 +104,7 @@
             
             if (!categories || categories.indexOf(data.topic.cid) > -1) {
                 // trim message based on config option
-                var maxContentLength = Slack.config['post:maxlength'] || false
+                var maxContentLength = Slack.config['post:maxlength'] || false;
                 if (maxContentLength && content.length > maxContentLength) { content = content.substring(0, maxContentLength) + '...'; }
                 // message format: <username> posted [<categoryname> : <topicname>]\n <message>
                 var message = '<' + data.topic.link + '|[' + data.topic.category + ': ' + data.topic.title + ']>\n' + content;
