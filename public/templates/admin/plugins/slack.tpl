@@ -23,6 +23,11 @@
 						<label for="postlength">Notification maximum characters</label>
 						<input type="number" name="post:maxlength" title="Max length of posts before trimming." class="form-control" placeholder="Leave blank to send full post.">
 					</div>
+					<div class="form-group col-xs-12">
+						<label for="categories">Categories</label>
+						<select name="slack:categories" title="Categories" class="form-control slack-category" multiple>
+                        </select>
+					</div>
 				</form>
 			</div>
 		</div>
@@ -38,6 +43,29 @@
 </div>
 
 <script>
+    
+    $(document).ready(function() {
+        var categories = null;
+
+		function addOptionsToAllSelects() {
+			$('.form-control.slack-category').each(function(index, element) {
+				addOptionsToSelect($(element));
+			});
+		}
+
+		function addOptionsToSelect(select) {
+			for(var i=0; i<categories.length; ++i) {
+				select.append('<option value=' + categories[i].cid + '>' + categories[i].name + '</option>');
+			}
+		}
+        
+        socket.emit('categories.get', function(err, data) {
+			categories = data;
+			addOptionsToAllSelects();
+		});
+        
+    });
+    
 	require(['settings'], function(Settings) {
 		Settings.load('slack', $('.slack-settings'));
 
