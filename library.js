@@ -28,7 +28,8 @@
                 domain: '',
                 token: '',
                 channel: '',
-                'post:maxlength': ''
+                'post:maxlength': '',
+                'slack:categories': ''
             }
         };
 
@@ -91,25 +92,30 @@
                             title     : topic.title,
                             category  : category.name,
                             link      : nconf.get('url') + '/topic/' + topic.slug,
-                            timestamp : topic.timestamp
+                            timestamp : topic.timestamp,
+                            cid       : topic.cid
                         };
                         return callback(null, data);
                     })
                 })  
             }
         }, function(err, data) {
-            // trim message based on config option
-            var maxContentLength = Slack.config['post:maxlength'] || false
-            if (maxContentLength && content.length > maxContentLength) { content = content.substring(0, maxContentLength) + '...'; }
-            // message format: <username> posted [<categoryname> : <topicname>]\n <message>
-            var message = '<' + data.topic.link + '|[' + data.topic.category + ': ' + data.topic.title + ']>\n' + content;
+            var categories = JSON.parse(Slack.config['slack:categories']) || false;
+            
+            if (!categories || categories.indexOf(data.topic.cid) > -1) {
+                // trim message based on config option
+                var maxContentLength = Slack.config['post:maxlength'] || false;
+                if (maxContentLength && content.length > maxContentLength) { content = content.substring(0, maxContentLength) + '...'; }
+                // message format: <username> posted [<categoryname> : <topicname>]\n <message>
+                var message = '<' + data.topic.link + '|[' + data.topic.category + ': ' + data.topic.title + ']>\n' + content;
 
-            slack.send({
-                'text'     : message,
-                'channel'  : (Slack.config['channel'] || '#general'),
-                'username' : data.user.username,
-                'icon_url' : data.user.image
-            });
+                slack.send({
+                    'text'     : message,
+                    'channel'  : (Slack.config['channel'] || '#general'),
+                    'username' : data.user.username,
+                    'icon_url' : data.user.image
+                });
+            }
         });
     },
 
